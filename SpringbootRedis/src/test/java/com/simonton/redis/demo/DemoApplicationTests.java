@@ -1,21 +1,19 @@
 package com.simonton.redis.demo;
 
 import com.alibaba.fastjson.JSON;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.*;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class DemoApplicationTests {
+@SpringBootTest(classes = {DemoApplication.class})
+public class DemoApplicationTests extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
