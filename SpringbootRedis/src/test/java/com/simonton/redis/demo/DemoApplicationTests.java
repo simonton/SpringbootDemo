@@ -6,10 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.redis.core.BoundHashOperations;
-import org.springframework.data.redis.core.BoundListOperations;
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -22,6 +19,9 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private RedisTemplate<String, String> redisTemplate;
+
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 
 	@Test
 	public void testRedisHello() {
@@ -86,6 +86,14 @@ public class DemoApplicationTests {
 		Map<String, String> redisData = boundHashOperations.entries();
 
 		System.out.println(JSON.toJSONString(redisData));
+	}
+
+	@Test
+	public void testString() {
+		BoundValueOperations boundValueOperations = stringRedisTemplate.boundValueOps("stringKey");
+		boundValueOperations.set("hello redis.");
+		System.out.println(boundValueOperations.get());
+		Assert.assertNotNull(boundValueOperations.get());
 	}
 
 }
